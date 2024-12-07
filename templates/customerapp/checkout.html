@@ -1,0 +1,158 @@
+{% extends 'navbar/customernavbar.html' %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block body %}
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        h3 {
+            text-align: center;
+            font-size: 28px;
+            margin-top: 30px;
+        }
+        .checkout-container {
+            width: 50%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group input[type="text"] {
+            width: 60%;
+        }
+        .payment-option {
+            margin-bottom: 20px;
+        }
+        .total-amount {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .pay-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .pay-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h3>Checkout</h3>
+    <div class="checkout-container">
+        <p style="text-align: center;">Thank you for your order! Please choose your payment method.</p>
+        <div class="order-details">
+            <p>Item: {{ order.item.name }}</p>
+            <p>Quantity: {{ order.quantity }}</p>
+            <p>Price per item: ₹{{ order.item.price }}</p>
+            <hr>
+        </div>
+
+        <div class="total-amount">
+            <p>Total Amount: ₹{{ total_price }}</p>
+        </div>
+<form method="POST" action="{% url 'customerapp:payment_view' order.id %}">
+    {% csrf_token %}
+    <!-- Payment method selection -->
+    <div class="payment-option">
+        <label for="payment_method">Choose your payment method:</label>
+        <select id="payment_method" name="payment_method" required>
+            <option value="" disabled selected>Select Payment Method</option>
+            <option value="upi">UPI</option>
+            <option value="credit_card">Credit Card</option>
+        </select>
+    </div>
+
+    <!-- UPI ID input (hidden by default) -->
+    <div class="form-group" id="upi_id_group" style="display: none;">
+        <label for="upi_id">Enter your UPI ID:</label>
+        <input type="text" id="upi_id" name="upi_id" placeholder="Your UPI ID" required>
+    </div>
+
+    <!-- Credit Card input fields (hidden by default) -->
+    <div class="form-group" id="credit_card_group" style="display: none;">
+        <label for="card_number">Credit Card Number:</label>
+        <input type="text" id="card_number" name="card_number" maxlength="12" pattern="\d{12}" placeholder="Your Credit Card Number" required>
+    </div>
+    <div class="form-group" id="expiry_date_group" style="display: none;">
+        <label for="expiry_date">Expiry Date:</label>
+        <input type="month" id="expiry_date" name="expiry_date" required>
+    </div>
+    <div class="form-group" id="cvv_group" style="display: none;">
+        <label for="cvv">CVV:</label>
+        <input type="password" id="cvv" name="cvv" placeholder="Your CVV" maxlength="3" pattern="\d{3}" required>
+        <small>Enter the 3-digit CVV from the back of your card.</small>
+    </div>
+    <button type="submit" class="pay-button"><a href="{% url 'customerapp:order_success_view' %}">Pay Now</a></button>
+</form>
+
+    </div>
+
+    <script>
+        // JavaScript to show/hide payment fields based on selected method
+        const paymentMethodSelect = document.getElementById('payment_method');
+        const upiIdGroup = document.getElementById('upi_id_group');
+        const creditCardGroup = document.getElementById('credit_card_group');
+        const expiryDateGroup = document.getElementById('expiry_date_group');
+        const cvvGroup = document.getElementById('cvv_group');
+        const expiryDateInput = document.getElementById('expiry_date');
+
+        // Set current month and year to ensure expiry date is greater than the current date
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth() + 1; // Month is 0-indexed
+
+        // Format the current date to be in YYYY-MM format
+        const minExpiryDate = `${currentYear}-${String(currentMonth).padStart(2, '0')}`;
+
+        // Set the min attribute for expiry date to current month
+        expiryDateInput.setAttribute('min', minExpiryDate);
+
+        paymentMethodSelect.addEventListener('change', function() {
+            if (this.value === 'upi') {
+                upiIdGroup.style.display = 'block';
+                creditCardGroup.style.display = 'none';
+                expiryDateGroup.style.display = 'none';
+                cvvGroup.style.display = 'none';
+            } else if (this.value === 'credit_card') {
+                upiIdGroup.style.display = 'none';
+                creditCardGroup.style.display = 'block';
+                expiryDateGroup.style.display = 'block';
+                cvvGroup.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+{% endblock %}
+</html>

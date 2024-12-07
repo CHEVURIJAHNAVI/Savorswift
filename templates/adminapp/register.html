@@ -1,0 +1,214 @@
+{% extends 'navbar/projectnavbar.html' %}
+{% block body %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6e6fa;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0px auto;
+            padding: 20px;
+            padding-top: 1rem;
+            padding-right: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+        }
+
+        h1 {
+            text-align: center;
+            color: #6a0dad; /* Dark purple text */
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #8a2be2;
+                    }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #dda0dd; /* Light purple border */
+            border-radius: 5px;
+            background-color: #f3e5f5;
+        }
+
+        input[type="text"][maxlength="6"] {
+            letter-spacing: 3px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #8a2be2;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 7px;
+        }
+
+        .submit-btn:hover {
+            background-color: #8a2be2;
+            transition: transform 1.0s ease;
+            transform: scale(1.05);
+        }
+        .navbar {
+            background-color: #8a2be2;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            margin-top: 10px;
+            color: white;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 27.5rem;
+            background-color: #8a2be2;
+            height: 50px;
+        }
+
+        .one {
+            display: flex;
+            gap: 5rem;
+        }
+
+        .one a {
+            color: #8a2be2;
+            text-decoration: none;
+        }
+
+        .one a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.875rem;
+            margin-bottom: 10px;
+        }
+
+        .info-message {
+            color: #ff7f7f;
+            font-size: 1rem;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Create an Account</h1>
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <p class="{% if message.tags == 'info' %}info-message{% else %}success-message{% endif %}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'registerpagelogic' %}">
+            {% csrf_token %}
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" placeholder="Username" required>
+                {% if form.username.errors %}
+                    <ul class="error-message">
+                        {% for error in form.username.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div>
+                <label for="firstname">First Name:</label>
+                <input type="text" name="firstname" id="firstname" placeholder="First Name" required>
+                {% if form.firstname.errors %}
+                    <ul class="error-message">
+                        {% for error in form.firstname.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div>
+                <label for="lastname">Last Name:</label>
+                <input type="text" name="lastname" id="lastname" placeholder="Last Name" required>
+                {% if form.lastname.errors %}
+                    <ul class="error-message">
+                        {% for error in form.lastname.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                {% if form.email.errors %}
+                    <ul class="error-message">
+                        {% for error in form.email.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                {% if form.password.errors %}
+                    <ul class="error-message">
+                        {% for error in form.password.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div>
+                <label for="password1">Confirm Password:</label>
+                <input type="password" name="password1" id="password1" placeholder="Confirm Password" required>
+                {% if form.password1.errors %}
+                    <ul class="error-message">
+                        {% for error in form.password1.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div>
+                <button type="submit" class="submit-btn">Register</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'navbar/customernavbar.html' %}
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block body %}
+    <title>Restaurants List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light background color for the page */
+            color: #333; /* Darker text for better readability */
+            margin: 0;
+            padding: 0;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            color: #5c2e91; /* Stylish purple */
+        }
+
+        /* Table Styling */
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+        }
+
+        th, td {
+            padding: 12px 20px;
+            text-align: left;
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        th {
+            background-color: #6f42c1; /* Dark purple */
+            color: white; /* White text for headers */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            background-color: #fff; /* White background for table data */
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f2f2f2; /* Alternate row background */
+        }
+
+        tr:hover {
+            background-color: #e0e0e0; /* Hover effect on rows */
+        }
+
+        /* Link Styling */
+        a {
+            color: #007bff; /* Blue color for links */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+            color: #0056b3; /* Darker blue when hovered */
+        }
+
+        /* Empty row */
+        .empty-row td {
+            text-align: center;
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <h3>Available Restaurants</h3>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Restaurant Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for restaurant in restaurants %}
+                <tr>
+                    <td>{{ restaurant.first_name }} {{ restaurant.last_name }}</td>
+                    <td>
+                        <a href="{% url 'customerapp:restaurant_items' restaurant.id %}">Explore Now</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr class="empty-row">
+                    <td colspan="2">No restaurants available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% endblock %}
+</html>

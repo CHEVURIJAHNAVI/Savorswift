@@ -1,0 +1,55 @@
+{% extends 'navBar/restaurantnavbar.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    {% block body %}
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+   <!-- restaurant_orders.html -->
+<h1>Orders for {{ request.user.username }}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Order Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.user.username }}</td>
+            <td>{{ order.item.name }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.total_price }}</td>
+            <td>{{ order.order_date }}</td>
+
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No orders available for your items.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+</body>
+</html>

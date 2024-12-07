@@ -1,0 +1,146 @@
+{% extends 'navbar/projectnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savor Swift</title>
+{% block body %}
+    <style>
+        /* Styles for homepage */
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero-section {
+            background-image: url('{% static 'images/adminapp/i6black.png' %}');50% 0 no-repeat fixed;
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background-color: #8a2be2;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #000;
+            color:white;
+            transition: background-color 0.8s ease;
+            transform:translate(scale(1.0));
+        }
+
+        .features-section {
+            padding: 40px 20px;
+            text-align: center;
+            background-color:#8a2be2;
+        }
+
+        .features-section h2 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            width: 30%;
+        }
+
+        .feature-item img {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 0px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+        .registers{
+        display:flex;
+        margin-left:20px;
+        margin-right:40px;
+        }
+        .registers>a{
+        margin-right:100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div>
+            <h1>Welcome to SavorSwift</h1>
+            <p>Your favorite meals, delivered fast and fresh.</p>
+            <div class="registers">
+            <a href=" {% url 'registerpagecall' %} " class="btn-primary">Order Now</a>
+            <a href=" {% url 'registerpagecall' %} " class="btn-primary">Join Us</a>
+                </div>
+        </div>
+    </div>
+    <section class="features-section">
+        <h2>Why Choose Us?</h2>
+        <div class="features">
+            <div class="feature-item">
+                <img src="{% static 'images/adminapp/c1.png' %}"  alt="Fast Delivery">
+                <h3>Fast Delivery</h3>
+                <p>We guarantee delivery in less than 30 minutes.</p>
+            </div>
+            <div class="feature-item">
+                <img src="{% static 'images/adminapp/c2.png' %}"  alt="Fresh Food">
+                <h3>Fresh Food</h3>
+                <p>Only the freshest ingredients, prepared by top chefs.</p>
+            </div>
+            <div class="feature-item">
+                <img src="{% static 'images/adminapp/c3.png' %}"  alt="Wide Variety">
+                <h3>Wide Variety</h3>
+                <p>Choose from hundreds of restaurants and cuisines.</p>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <p>&copy; 2024 SavorSwift. All rights reserved.</p>
+    </footer>
+</body>
+{% endblock %}
+</html>
+

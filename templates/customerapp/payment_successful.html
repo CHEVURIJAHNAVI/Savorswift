@@ -1,0 +1,14 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block body %}
+    <title>Order Success</title>
+</head>
+<body>
+    <h3>Your payment was successful!</h3>
+    <p>Thank you for your order. Food will be delivered at your door shortly.</p>
+    <h3><a href="{% url 'customerapp:restaurant_list' %}">Order More</a></h3>
+</body>
+{% endblock %}
+</html>

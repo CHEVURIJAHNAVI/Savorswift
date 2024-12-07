@@ -1,0 +1,31 @@
+{% extends 'navbar/customernavbar.html' %}
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Savor Swift</title>
+    <style>
+        body {
+       background-color: #9370db;
+        }
+    </style>
+</head>
+<body>
+{% block body %}
+<h1>Orders for Your Restaurant</h1>
+<ul>
+    {% for order in orders %}
+        <li>
+            <strong>Customer:</strong> {{ order.customer.username }} <br>
+            <strong>Item:</strong> {{ order.item.name }} <br>
+            <strong>Quantity:</strong> {{ order.quantity }} <br>
+            <strong>Status:</strong> {{ order.status }} <br>
+            <strong>Total Price:</strong> ${{ order.total_price }} <br>
+            <strong>Order Date:</strong> {{ order.order_date }} <br>
+        </li>
+    {% empty %}
+        <li>No orders yet.</li>
+    {% endfor %}
+</ul>
+</body>
+{% endblock %}

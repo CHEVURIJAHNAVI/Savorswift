@@ -1,0 +1,99 @@
+{% extends 'NavBar/restaurantnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Taj</title>
+    {% block body %}
+<style>
+    /* General Styling */
+body {
+    font-family: Arial, sans-serif;
+
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+/* Form Styling */
+.add-item-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-item-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.add-item-form input[type="text"],
+.add-item-form input[type="file"],
+.add-item-form textarea,
+.add-item-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.add-item-form input[type="file"] {
+    padding: 3px;
+}
+
+.add-item-form textarea {
+    resize: vertical;
+}
+
+/* Button Styling */
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #8a2be2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submit-button:hover {
+    background-color: #8a2be2;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .add-item-form {
+        width: 90%;
+        padding: 15px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<h1>Edit Item</h1>
+<form method="post" enctype="multipart/form-data" class="add-item-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="submit-button">Save Changes</button>
+</form>
+{% endblock %}
+</body>
+</html>

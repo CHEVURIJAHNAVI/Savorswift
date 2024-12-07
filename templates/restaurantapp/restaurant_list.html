@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- restaurantapp/templates/restaurantapp/restaurant_list.html -->
+<h1>Restaurants</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Restaurant Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for restaurant in restaurants %}
+            <tr>
+                <td>{{ restaurant.username }}</td>
+                <td>
+                    <a href="{% url 'restaurant_menu' restaurant.id %}">Explore Menu</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</body>
+</html>

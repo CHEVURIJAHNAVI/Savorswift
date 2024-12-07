@@ -1,0 +1,77 @@
+{% extends 'navBar/restaurantnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     {% block body %}
+    <title>SavorSwift - Restaurant Menu Management</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #8a2be2;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image:url('{% static 'images/restaurantapp/restauranthome.png' %}'); 50% 0 no-repeat fixed;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            text-align: center;
+            height:93vh;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Slight dark overlay to make text stand out */
+            border-radius: 10px;
+            max-width:100%;
+
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight:700;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+             font-weight:700;
+        }
+
+
+        li{
+
+
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome to SavorSwift – Thank You for Choosing Us!</h1>
+        <br>
+        <br>
+        <p>We’re excited to help you manage your restaurant’s
+            <br>
+            menu online with ease. With SavorSwift, you can effortlessly
+            <br>add, update, and organize your menu items, ensuring a
+            <br>seamless experience for your customers.</p>
+
+        <h2>Here’s what you can do with us:</h2>
+        <ul style="text-align:left; font-size: 18px;font-weight:700; margin-left:30rem; ">
+            <li>Add new menu items, descriptions, and prices</li>
+            <li>Upload beautiful photos of your dishes</li>
+            <li>Edit your offerings anytime, anywhere</li>
+            <li>Keep your menu fresh and up-to-date for your customers</li>
+        </ul>
+         <img src="{% static 'images/customerapp/handshake.png' %}" alt="Description of Image">
+    </div>
+{% endblock %}
+</body>
+</html>

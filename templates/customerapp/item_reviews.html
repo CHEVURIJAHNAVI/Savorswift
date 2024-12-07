@@ -1,0 +1,67 @@
+{% extends 'navbar/customernavbar.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Reviews</title>
+</head>
+{% block body %}
+<style>
+form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.feedback-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-card h4 {
+    font-size: 18px;
+    color: #333;
+}
+
+.feedback-card p {
+    font-size: 16px;
+    color: #555;
+}
+
+.feedback-card small {
+    color: #888;
+}
+
+</style>
+<body>
+
+
+<h3>Item Reviews</h3>
+
+{% for feedback in feedbacks %}
+    <div class="feedback-card">
+        <h4>{{ feedback.user.username }}</h4>
+        <p>Rating: {{ feedback.rating }}/5</p>
+        <p>{{ feedback.comments }}</p>
+        <p><small>Feedback given on: {{ feedback.feedback_date }}</small></p>
+    </div>
+{% endfor %}
+{% endblock %}
+
+</body>
+</html>
